@@ -26,23 +26,25 @@ class ComicFragment : Fragment(), Contract.View {
         return ViewModelProviders.of(this).get(ComicViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_comic, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_comic, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         presenter.attach(this)
 
-        getViewModel().imageUrl.observe(this, Observer { url ->
-            // Load the image URL
-            Glide.with(this).load(url).into(imageView)
-        })
+        getViewModel().apply {
+            imageUrl.observe(this@ComicFragment, Observer { url ->
+                // Load the image URL
+                Glide.with(this@ComicFragment).load(url).into(imageView)
+            })
 
-        getViewModel().title.observe(this, Observer { title ->
-            titleText.text = title
-        })
+            title.observe(this@ComicFragment, Observer { title ->
+                titleText.text = title
+            })
+        }
 
         previousButton.setOnClickListener {
             presenter.showPreviousComic()
