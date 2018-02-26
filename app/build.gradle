@@ -83,4 +83,7 @@ dependencies {
 
     // Image loading
     implementation 'com.github.bumptech.glide:glide:4.2.0'
+
+    // KTX
+    implementation 'androidx.core:core-ktx:0.1'
 }
