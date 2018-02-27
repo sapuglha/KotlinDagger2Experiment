@@ -11,7 +11,6 @@ import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 /**
  * App Module
@@ -20,25 +19,25 @@ import javax.inject.Singleton
 @Module
 class AppModule(val app: App) {
     @Provides
-    @Singleton
+    @AppScope
     fun provideApp() = app
 
     @Provides
-    @Singleton
+    @AppScope
     fun provideAppDatabase(app: App) : AppDatabase {
         return Room.databaseBuilder(app, AppDatabase::class.java, "database-name").build()
     }
 
     @Provides
-    @Singleton
+    @AppScope
     fun provideMainRepository(database: AppDatabase) = MainRepository(app, database)
 
     @Provides
-    @Singleton
+    @AppScope
     fun provideXkcdRepository(api: XkcdAPI) = XkcdRepository(api)
 
     @Provides
-    @Singleton
+    @AppScope
     fun provideXkcdApi(app: App): XkcdAPI {
         return Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

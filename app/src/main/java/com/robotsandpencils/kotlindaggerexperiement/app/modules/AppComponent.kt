@@ -1,18 +1,22 @@
 package com.robotsandpencils.kotlindaggerexperiement.app.modules
 
-import com.robotsandpencils.kotlindaggerexperiement.App
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
-import javax.inject.Singleton
 
 /**
  * Main App Component
  */
-@Singleton
-@Component(modules = arrayOf(AndroidSupportInjectionModule::class, AppModule::class,
-        com.robotsandpencils.kotlindaggerexperiement.presentation.main.module.Module::class,
-        com.robotsandpencils.kotlindaggerexperiement.presentation.counter.module.Module::class,
-        com.robotsandpencils.kotlindaggerexperiement.presentation.comic.module.Module::class))
+@AppScope
+@Component(modules = [
+    AndroidSupportInjectionModule::class,
+    AppModule::class
+])
 interface AppComponent {
-    fun inject(app: App)
+    fun userComponent(): UserComponent.Builder
+
+    @Component.Builder
+    interface Builder {
+        fun appModule(module: AppModule): Builder
+        fun build(): AppComponent
+    }
 }
