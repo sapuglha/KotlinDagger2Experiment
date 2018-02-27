@@ -1,10 +1,12 @@
 package com.robotsandpencils.kotlindaggerexperiement.presentation.base
 
+import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 
 open class BasePresenter<V : View>(protected val uiThreadQueue: UiThreadQueue) : Presenter<V> {
 
     protected var view: V? = null
+    protected val disposables = CompositeDisposable()
 
     /**
      * True once the attach method has been called
@@ -26,6 +28,7 @@ open class BasePresenter<V : View>(protected val uiThreadQueue: UiThreadQueue) :
     @Synchronized
     override fun detach() {
         Timber.d("<<< Presenter Detached: %s", javaClass.name)
+        disposables.clear()
         uiThreadQueue.enabled = false
         view = null
         isAttached = false

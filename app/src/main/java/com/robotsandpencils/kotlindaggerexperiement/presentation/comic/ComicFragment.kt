@@ -3,6 +3,8 @@ package com.robotsandpencils.kotlindaggerexperiement.presentation.comic
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.transition.Fade
+import android.support.transition.TransitionManager
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,19 +38,42 @@ class ComicFragment : Fragment(), Contract.View {
         presenter.attach(this)
 
         getViewModel().apply {
-            imageUrl.observe(this@ComicFragment, Observer { url ->
-                // Load the image URL
-                Glide.with(this@ComicFragment).load(url).into(imageView)
-            })
+            state.observe(this@ComicFragment, Observer {
+                it?.let {
 
-            title.observe(this@ComicFragment, Observer { title ->
-                titleText.text = title
+                    TransitionManager.beginDelayedTransition(comicFragment, Fade())
+
+                    when (it) {
+                        is ComicState.Loading -> {
+                            renderLoading()
+                        }
+                        is ComicState.Error -> {
+                            renderError()
+                        }
+                        is ComicState.ComicLoaded -> renderComic(it)
+                    }
+                }
             })
         }
 
         previousButton.setOnClickListener {
             presenter.showPreviousComic()
         }
+    }
+
+    private fun renderLoading() {
+        titleText.text = "Loading..."
+        imageView.setImageDrawable(null)
+    }
+
+    private fun renderError() {
+        titleText.text = "Error!"
+        imageView.setImageDrawable(null)
+    }
+
+    private fun renderComic(state: ComicState.ComicLoaded) {
+        Glide.with(this@ComicFragment).load(state.imageUrl).into(imageView)
+        titleText.text = state.title
     }
 
     override fun onDestroyView() {
