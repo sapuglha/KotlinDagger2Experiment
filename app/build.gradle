@@ -11,7 +11,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.robotsandpencils.kotlindaggerexperiement.TestRunner"
     }
     buildTypes {
         release {
@@ -36,15 +36,29 @@ ext {
     groupieVersion = "2.0.0"
 }
 
+ext {
+    mockitoVersion = "2.12.0"
+    espressoVersion = "3.0.1"
+    okhttpVersion = "3.9.1"
+}
+
+configurations.all {
+    resolutionStrategy.force "com.android.support:support-annotations:$supportVersion"
+    resolutionStrategy.force "com.android.support:support-v13:$supportVersion"
+    resolutionStrategy.force "com.android.support:support-fragment:$supportVersion"
+    resolutionStrategy.force "com.android.support:preference-v14:$supportVersion"
+    resolutionStrategy.force "com.google.dagger:dagger:$daggerVersion"
+    resolutionStrategy.force "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    resolutionStrategy.force "junit:junit:4.12"
+    resolutionStrategy.force "com.google.code.findbugs:jsr305:3.0.1"
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:$supportVersion"
     implementation "com.android.support:design:$supportVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.18"
@@ -86,4 +100,27 @@ dependencies {
 
     // KTX
     implementation 'androidx.core:core-ktx:0.1'
+
+    // Android Tests
+
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espressoVersion"
+
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:$okhttpVersion") {
+        exclude group: 'org.bouncycastle'
+    }
+    androidTestImplementation 'com.squareup.rx.idler:rx2-idler:0.9.0'
+    androidTestImplementation('com.nhaarman:mockito-kotlin-kt1.1:1.5.0') {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
+    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
+
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$daggerVersion"
+    kaptAndroidTest "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    androidTestImplementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.3'
 }
