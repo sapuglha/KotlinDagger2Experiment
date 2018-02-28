@@ -47,7 +47,7 @@ open class NetModule {
         val defaultEnvironment =
                 when (BuildConfig.BUILD_TYPE) {
                     "debug" -> {
-                        "Production Server"
+                        "Stub Server"
                     }
                     "release" -> {
                         "Production Server"

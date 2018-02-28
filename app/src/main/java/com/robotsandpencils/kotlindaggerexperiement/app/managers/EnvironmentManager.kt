@@ -28,7 +28,7 @@ class EnvironmentManager(private val app: App,
             doRestart(app)
         }
 
-        val currentEnvironment = preferencesManager.getString("selected_environment", "Production Server")
+        val currentEnvironment = preferencesManager.getString("selected_environment", "Stub Server")
 
         environments.environments.forEach { environment ->
             val icon = if (currentEnvironment == environment.name)
