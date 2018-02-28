@@ -3,8 +3,6 @@ package com.robotsandpencils.kotlindaggerexperiement.presentation.comic
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.transition.Fade
-import android.support.transition.TransitionManager
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,9 +38,6 @@ class ComicFragment : Fragment(), Contract.View {
         getViewModel().apply {
             state.observe(this@ComicFragment, Observer {
                 it?.let {
-
-                    TransitionManager.beginDelayedTransition(comicFragment, Fade())
-
                     when (it) {
                         is ComicState.Loading -> {
                             renderLoading()
@@ -62,19 +57,22 @@ class ComicFragment : Fragment(), Contract.View {
     }
 
     private fun renderLoading() {
-        titleText.text = "Loading..."
+        titleText.text = getString(R.string.comic_loading)
         imageView.setImageDrawable(null)
+        imageView.visibility = View.GONE
     }
 
     private fun renderError() {
-        titleText.text = "Error!"
+        titleText.text = getString(R.string.comic_error)
         imageView.setImageDrawable(null)
+        imageView.visibility = View.GONE
     }
 
     private fun renderComic(state: ComicState.ComicLoaded) {
         Picasso.with(imageView.context).load(state.imageUrl).into(imageView)
         imageView.tag = state.imageUrl
         titleText.text = state.title
+        imageView.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {

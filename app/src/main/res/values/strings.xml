@@ -14,4 +14,6 @@
     <string name="action_manager_email_failed">Email creation failed</string>
     <string name="environment_manager_choose_environment_title">Choose environment</string>
     <string name="auth_factory_fingerprint_decryption_failed">Fingerprint not recognized</string>
+    <string name="comic_loading">Loading...</string>
+    <string name="comic_error">Error!</string>
 </resources>
