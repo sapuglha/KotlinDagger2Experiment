@@ -3,13 +3,14 @@ package com.robotsandpencils.kotlindaggerexperiement.base
 import com.robotsandpencils.kotlindaggerexperiement.App
 import com.robotsandpencils.kotlindaggerexperiement.TestApp
 import com.robotsandpencils.kotlindaggerexperiement.app.modules.*
+import com.robotsandpencils.kotlindaggerexperiement.tests.MockTest
 import dagger.Component
 import dagger.Subcomponent
 import dagger.android.support.AndroidSupportInjectionModule
 
 class BaseDaggerTestHarness(val app: App,
-                            val netModule: NetModule = TestApp.TestNetModule(),
-                            val repositoryModule: RepositoryModule,
+                            netModule: NetModule = TestApp.TestNetModule(),
+                            repositoryModule: RepositoryModule = RepositoryModule(),
                             appModule: AppModule = TestApp.TestAppModule(app)) {
 
     private val component: TestAppComponent
@@ -62,5 +63,7 @@ class BaseDaggerTestHarness(val app: App,
 
         // Need to add inject methods here for any
         // classes that need to be injected
+
+        fun inject(mockTest: MockTest)
     }
 }
