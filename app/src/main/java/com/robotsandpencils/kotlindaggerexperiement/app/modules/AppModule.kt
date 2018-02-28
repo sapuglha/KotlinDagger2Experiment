@@ -3,6 +3,7 @@ package com.robotsandpencils.kotlindaggerexperiement.app.modules
 import android.arch.persistence.room.Room
 import com.robotsandpencils.kotlindaggerexperiement.App
 import com.robotsandpencils.kotlindaggerexperiement.app.db.AppDatabase
+import com.robotsandpencils.kotlindaggerexperiement.app.managers.PreferencesManager
 import dagger.Module
 import dagger.Provides
 
@@ -15,6 +16,10 @@ open class AppModule(val app: App) {
     @Provides
     @AppScope
     fun provideApp() = app
+
+    @Provides
+    @AppScope
+    open fun providePreferencesManager() = PreferencesManager(app)
 
     @Provides
     @AppScope

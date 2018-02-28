@@ -1,9 +1,9 @@
 package com.robotsandpencils.kotlindaggerexperiement
 
-import com.robotsandpencils.kotlindaggerexperiement.app.modules.AppComponent
-import com.robotsandpencils.kotlindaggerexperiement.app.modules.AppModule
-import com.robotsandpencils.kotlindaggerexperiement.app.modules.DaggerAppComponent
-import com.robotsandpencils.kotlindaggerexperiement.app.modules.UserComponent
+import com.robotsandpencils.kotlindaggerexperiement.app.managers.PreferencesManager
+import com.robotsandpencils.kotlindaggerexperiement.app.model.Environment
+import com.robotsandpencils.kotlindaggerexperiement.app.model.Environments
+import com.robotsandpencils.kotlindaggerexperiement.app.modules.*
 import timber.log.Timber
 
 /**
@@ -25,12 +25,19 @@ class TestApp : App() {
     override fun createUserComponent(): UserComponent {
         Timber.e("**** CREATED USER COMPONENT")
         return component.userComponent()
+                .netModule(TestNetModule())
+                .repositoryModule(RepositoryModule())
                 .build()
 
     }
 
     fun clearComponent() {
         this.resetUserComponent()
+    }
+
+    open class TestNetModule : NetModule() {
+        override fun provideEnvironment(environments: Environments, preferencesManager: PreferencesManager): Environment =
+                Environment.createTestEnvironment("http://localhost:8080")
     }
 
     open class TestAppModule(app: App) : AppModule(app)

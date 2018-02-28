@@ -1,0 +1,39 @@
+{
+  "environments": [
+    {
+      "name": "Local Stub Server",
+      "apiKey": "temp",
+      "clientSecret": "temp",
+      "baseUrl": "https://xkcd.com",
+      "analyticsAppId": "ID"
+    },
+    {
+      "name": "Stub Server",
+      "apiKey": "temp",
+      "clientSecret": "temp",
+      "baseUrl": "https://xkcd.com",
+      "analyticsAppId": "ID"
+    },
+    {
+      "name": "Integration Server",
+      "apiKey": "temp",
+      "clientSecret": "temp",
+      "baseUrl": "https://xkcd.com",
+      "analyticsAppId": "ID"
+    },
+    {
+      "name": "Pre-Production Server",
+      "apiKey": "temp",
+      "clientSecret": "temp",
+      "baseUrl": "https://xkcd.com",
+      "analyticsAppId": "ID"
+    },
+    {
+      "name": "Production Server",
+      "apiKey": "temp",
+      "clientSecret": "temp",
+      "baseUrl": "https://xkcd.com",
+      "analyticsAppId": "ID"
+    }
+  ]
+}

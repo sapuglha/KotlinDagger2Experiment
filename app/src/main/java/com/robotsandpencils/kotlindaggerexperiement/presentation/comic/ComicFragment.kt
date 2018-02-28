@@ -9,8 +9,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 import com.robotsandpencils.kotlindaggerexperiement.R
+import com.squareup.picasso.Picasso
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_comic.*
 import javax.inject.Inject
@@ -72,7 +72,8 @@ class ComicFragment : Fragment(), Contract.View {
     }
 
     private fun renderComic(state: ComicState.ComicLoaded) {
-        Glide.with(this@ComicFragment).load(state.imageUrl).into(imageView)
+        Picasso.with(imageView.context).load(state.imageUrl).into(imageView)
+        imageView.tag = state.imageUrl
         titleText.text = state.title
     }
 

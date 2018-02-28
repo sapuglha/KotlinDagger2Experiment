@@ -1,7 +1,9 @@
 package com.robotsandpencils.kotlindaggerexperiement.app.modules
 
 import com.robotsandpencils.kotlindaggerexperiement.App
+import com.robotsandpencils.kotlindaggerexperiement.app.internal.AuthStrategyFactory
 import dagger.Subcomponent
+import okhttp3.OkHttpClient
 
 @UserScope
 @Subcomponent(modules = [
@@ -14,6 +16,9 @@ import dagger.Subcomponent
 interface UserComponent {
 
     fun inject(app: App)
+    fun inject(app: AuthStrategyFactory)
+
+    fun client(): OkHttpClient
 
     @Subcomponent.Builder
     interface Builder {

@@ -8,7 +8,7 @@ import dagger.Subcomponent
 import dagger.android.support.AndroidSupportInjectionModule
 
 class BaseDaggerTestHarness(val app: App,
-                            val netModule: NetModule,
+                            val netModule: NetModule = TestApp.TestNetModule(),
                             val repositoryModule: RepositoryModule,
                             appModule: AppModule = TestApp.TestAppModule(app)) {
 

@@ -9,4 +9,9 @@
     <string name="add">Add</string>
     <string name="comic">Comic</string>
     <string name="previous_comic">Previous Comic</string>
+    <string name="action_manager_coming_soon">Coming Soon</string>
+    <string name="action_manager_email_chooser_title">Email Apps</string>
+    <string name="action_manager_email_failed">Email creation failed</string>
+    <string name="environment_manager_choose_environment_title">Choose environment</string>
+    <string name="auth_factory_fingerprint_decryption_failed">Fingerprint not recognized</string>
 </resources>
