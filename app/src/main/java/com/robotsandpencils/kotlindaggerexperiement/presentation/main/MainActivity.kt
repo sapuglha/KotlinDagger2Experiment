@@ -5,15 +5,15 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.robotsandpencils.kotlindaggerexperiement.R
 import com.robotsandpencils.kotlindaggerexperiement.app.db.User
+import com.robotsandpencils.kotlindaggerexperiement.app.extensions.initializeWithLinearLayout
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
-import com.xwray.groupie.UpdatingGroup
+import com.xwray.groupie.Section
 import com.xwray.groupie.ViewHolder
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), Contract.View {
     @Inject lateinit var presenter: Contract.Presenter
 
     private val groupAdapter = GroupAdapter<ViewHolder>()
-    private val updatingGroup = UpdatingGroup()
+    private val updatingGroup = Section()
     private var currentTabItem: Int = R.id.navigation_home
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -80,8 +80,10 @@ class MainActivity : AppCompatActivity(), Contract.View {
     }
 
     private fun connectRecyclerView() {
-        list.layoutManager = LinearLayoutManager(this)
-        list.adapter = groupAdapter
+
+        list.initializeWithLinearLayout {
+            adapter = groupAdapter
+        }
 
         groupAdapter.add(updatingGroup)
 
