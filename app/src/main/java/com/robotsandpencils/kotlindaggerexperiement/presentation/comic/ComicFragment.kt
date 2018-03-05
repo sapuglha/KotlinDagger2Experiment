@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.robotsandpencils.kotlindaggerexperiement.R
+import com.robotsandpencils.kotlindaggerexperiement.presentation.base.PresenterLifecycleListener
 import com.squareup.picasso.Picasso
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_comic.*
@@ -16,6 +17,8 @@ import javax.inject.Inject
 class ComicFragment : Fragment(), Contract.View {
     @Inject
     lateinit var presenter: Contract.Presenter
+
+    private var presenterLifecycleListener: PresenterLifecycleListener<Contract.View, Contract.Presenter>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
@@ -33,7 +36,7 @@ class ComicFragment : Fragment(), Contract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter.attach(this)
+        presenterLifecycleListener = PresenterLifecycleListener(lifecycle, this, presenter)
 
         getViewModel().apply {
             state.observe(this@ComicFragment, Observer {
@@ -77,7 +80,6 @@ class ComicFragment : Fragment(), Contract.View {
 
     override fun onDestroyView() {
         super.onDestroyView()
-
-        presenter.detach()
+        presenterLifecycleListener = null
     }
 }
