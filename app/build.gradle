@@ -54,7 +54,7 @@ kotlin {
 }
 
 ext {
-    supportVersion = "27.0.2"
+    supportVersion = "27.1.0"
     archVersion = "1.1.0"
     archVersionA = "1.0.0"
     daggerVersion = "2.14.1"

@@ -26,7 +26,9 @@ class LifecycleAwareUiThreadQueue(lifecycleOwner: LifecycleOwner) : UiThreadQueu
             super.run(runnable)
         } else {
             Timber.i("Deferred running a runnable due to bad lifecycle state: %s", lifecycle.currentState.toString())
-            deferredRunnables.add(runnable)
+            synchronized(deferredRunnables) {
+                deferredRunnables.add(runnable)
+            }
         }
     }
 
@@ -35,18 +37,24 @@ class LifecycleAwareUiThreadQueue(lifecycleOwner: LifecycleOwner) : UiThreadQueu
             super.runDelayed(runnable, delayMilliseconds)
         } else {
             Timber.i("Deferred running a runnable due to bad lifecycle state: %s", lifecycle.currentState.toString())
-            deferredDelayedRunnable.add(DelayedRunnable(runnable, delayMilliseconds))
+            synchronized(deferredDelayedRunnable) {
+                deferredDelayedRunnable.add(DelayedRunnable(runnable, delayMilliseconds))
+            }
         }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     internal fun processQueues() {
         while (!deferredRunnables.isEmpty()) {
-            val runnable = deferredRunnables.removeAt(0)
+            val runnable = synchronized(deferredRunnables) {
+                deferredRunnables.removeAt(0)
+            }
             run(runnable)
         }
         while (!deferredDelayedRunnable.isEmpty()) {
-            val runnable = deferredDelayedRunnable.removeAt(0)
+            val runnable = synchronized(deferredDelayedRunnable) {
+                deferredDelayedRunnable.removeAt(0)
+            }
             runDelayed(runnable.runnable, runnable.delayMilliseconds)
         }
     }
