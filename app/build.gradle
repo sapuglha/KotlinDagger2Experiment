@@ -158,8 +158,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.hamcrest:hamcrest-junit:2.0.0.0'
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
-    testImplementation('com.nhaarman:mockito-kotlin-kt1.1:1.5.0') {
+    testImplementation('com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-alpha03') {
         exclude group: 'org.jetbrains.kotlin'
     }
+
     testImplementation "android.arch.core:core-testing:$archVersionA"
 }
