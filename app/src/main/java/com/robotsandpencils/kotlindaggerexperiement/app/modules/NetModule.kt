@@ -113,7 +113,7 @@ open class NetModule {
 
     @Provides
     @UserScope
-    fun provideXkcdApi(app: App, okHttpClient: OkHttpClient, env: Environment): XkcdAPI {
+    fun provideXkcdApi(okHttpClient: OkHttpClient, env: Environment): XkcdAPI {
         return Retrofit.Builder()
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

@@ -18,7 +18,6 @@ import java.util.*
 /**
  * Manages Preferences
  */
-@com.robotsandpencils.kotlindaggerexperiment.OpenClassOnDebug
 class PreferencesManager(context: Context) {
 
     private val preferences: SharedPreferences
