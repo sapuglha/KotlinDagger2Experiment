@@ -14,17 +14,17 @@ class Presenter(private val repository: XkcdRepository, uiThreadQueue: UiThreadQ
     override fun attach(view: Contract.View) {
         super.attach(view)
 
-        val viewModel = view.getViewModel()
-
-        val state = viewModel.state.value
-        when (state) {
-            is ComicState.ComicLoaded -> {
-                val currentNum = state.comicNumber
-                requestComic(currentNum, viewModel)
-            }
-            else -> {
-                viewModel.state.value = ComicState.Loading()
-                requestLatestComic(viewModel)
+        view.getViewModel()?.let { viewModel ->
+            val state = viewModel.state.value
+            when (state) {
+                is ComicState.ComicLoaded -> {
+                    val currentNum = state.comicNumber
+                    requestComic(currentNum, viewModel)
+                }
+                else -> {
+                    viewModel.state.value = ComicState.Loading()
+                    requestLatestComic(viewModel)
+                }
             }
         }
     }

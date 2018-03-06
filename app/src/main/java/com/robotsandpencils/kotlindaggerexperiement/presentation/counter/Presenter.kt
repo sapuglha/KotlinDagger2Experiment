@@ -10,7 +10,8 @@ class Presenter(private val mainRepository: MainRepository, uiThreadQueue: UiThr
     override fun attach(view: Contract.View) {
         super.attach(view)
 
-        val viewModel = view.getViewModel()
-        viewModel.count = mainRepository.getUserDao().getCount()
+        view.getViewModel()?.let { viewModel ->
+            viewModel.count = mainRepository.getUserDao().getCount()
+        }
     }
 }

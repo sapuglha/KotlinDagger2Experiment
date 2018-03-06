@@ -1,16 +1,15 @@
 package com.robotsandpencils.kotlindaggerexperiement.presentation.main
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.robotsandpencils.kotlindaggerexperiement.R
 import com.robotsandpencils.kotlindaggerexperiement.app.db.User
 import com.robotsandpencils.kotlindaggerexperiement.app.extensions.initializeWithLinearLayout
+import com.robotsandpencils.kotlindaggerexperiement.presentation.base.BaseActivity
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.Section
@@ -20,13 +19,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity(), Contract.View {
+class MainActivity : BaseActivity(), Contract.View {
 
     companion object {
         val CURRENT_TAB_ITEM: String = "CurrentTabItem"
     }
 
-    @Inject lateinit var presenter: Contract.Presenter
+    @Inject
+    lateinit var presenter: Contract.Presenter
 
     private val groupAdapter = GroupAdapter<ViewHolder>()
     private val updatingGroup = Section()
@@ -87,11 +87,13 @@ class MainActivity : AppCompatActivity(), Contract.View {
 
         groupAdapter.add(updatingGroup)
 
-        getViewModel().users.observe(this, Observer { users ->
-            Log.d("USERS", "Got some users: $users thread =  ${Thread.currentThread().name}")
+        getViewModel()?.let { vm ->
+            vm.users.observe(this, Observer { users ->
+                Log.d("USERS", "Got some users: $users thread =  ${Thread.currentThread().name}")
 
-            updatingGroup.update(getUserItems(users))
-        })
+                updatingGroup.update(getUserItems(users))
+            })
+        }
 
         groupAdapter.apply {
             setOnItemClickListener { item, _ ->
@@ -133,9 +135,7 @@ class MainActivity : AppCompatActivity(), Contract.View {
         message.text = getString(text)
     }
 
-    override fun getViewModel(): MainViewModel {
-        return ViewModelProviders.of(this).get(MainViewModel::class.java)
-    }
+    override fun getViewModel(): MainViewModel? = safeGetViewModel()
 
     override fun showHome() {
         homeLayout.visibility = View.VISIBLE

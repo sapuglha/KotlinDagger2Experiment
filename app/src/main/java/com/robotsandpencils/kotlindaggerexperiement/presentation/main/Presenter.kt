@@ -22,7 +22,7 @@ class Presenter(private val mainRepository: MainRepository, uiThreadQueue: UiThr
         view.setTitle("Presenter Attached")
 
         val viewModel = view.getViewModel()
-        viewModel.users = mainRepository.getUserDao().getAll()
+        viewModel?.users = mainRepository.getUserDao().getAll()
     }
 
     override fun addUser(id: String, firstName: String, lastName: String) {

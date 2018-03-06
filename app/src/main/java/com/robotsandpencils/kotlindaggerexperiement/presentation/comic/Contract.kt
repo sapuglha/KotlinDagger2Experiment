@@ -16,6 +16,6 @@ interface Contract {
      * View Contract
      */
     interface View : com.robotsandpencils.kotlindaggerexperiement.presentation.base.View {
-        fun getViewModel(): ComicViewModel
+        fun getViewModel(): ComicViewModel?
     }
 }

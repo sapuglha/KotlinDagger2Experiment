@@ -23,7 +23,7 @@ interface Contract {
      * View Contract
      */
     interface View : com.robotsandpencils.kotlindaggerexperiement.presentation.base.View {
-        fun getViewModel() : MainViewModel
+        fun getViewModel(): MainViewModel?
         fun setTitle(text : String)
         fun setTitle(@StringRes text: Int)
         fun clearFields()
