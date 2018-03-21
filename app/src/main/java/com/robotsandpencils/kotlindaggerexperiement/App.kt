@@ -12,6 +12,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
+import net.danlew.android.joda.JodaTimeAndroid
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -41,6 +42,8 @@ open class App : Application(), HasActivityInjector, HasSupportFragmentInjector 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+
+        JodaTimeAndroid.init(this)
     }
 
     fun resetUserComponent() {

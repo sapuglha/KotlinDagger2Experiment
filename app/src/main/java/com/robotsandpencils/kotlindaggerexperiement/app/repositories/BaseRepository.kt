@@ -1,6 +1,7 @@
 package com.robotsandpencils.kotlindaggerexperiement.app.repositories
 
 import android.annotation.SuppressLint
+import arrow.core.Either
 import com.google.gson.GsonBuilder
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
@@ -65,7 +66,7 @@ open class BaseRepository {
 
     /** This is for requests that have a response body, when no success or error handling is required */
     @SuppressLint("CheckResult")
-    internal fun <T> syncModel(modelObservable: Observable<T>, relay: Relay<T>, analyticsFilter: (T) -> Unit = { }) {
+    internal fun <T> syncModel(modelObservable: Observable<T>, relay: Relay<Either<Throwable, T>>, analyticsFilter: (T) -> Unit = { }) {
         busy()
         modelObservable
                 .compose(applySchedulers())
@@ -75,9 +76,10 @@ open class BaseRepository {
                 }
                 .subscribe({ model ->
                     notBusy()
-                    relay.accept(model)
+                    relay.accept(Either.Right(model))
                 }) { exception ->
                     handleException(exception)
+                    relay.accept(Either.Left(exception))
                 }
     }
 
@@ -134,11 +136,11 @@ open class BaseRepository {
         }
     }
 
-    protected fun busy() {
+    private fun busy() {
         busyRelay.accept(BusyState(inFlightCount.incrementAndGet() > 0))
     }
 
-    protected fun notBusy() {
+    private fun notBusy() {
         busyRelay.accept(BusyState(inFlightCount.decrementAndGet() > 0))
     }
 }

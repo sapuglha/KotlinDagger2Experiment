@@ -57,6 +57,7 @@ ext {
     mockitoVersion = "2.15.0"
     espressoVersion = "3.0.1"
     okhttpVersion = "3.9.1"
+    arrowVersion = "0.6.1"
 }
 
 configurations.all {
@@ -127,9 +128,15 @@ dependencies {
     // KTX
     implementation 'androidx.core:core-ktx:0.2'
 
+    // Arrow
+    implementation "io.arrow-kt:arrow-core:$arrowVersion"
+
     // Material Dialogs
     implementation 'com.afollestad.material-dialogs:core:0.9.4.2'
     implementation 'com.afollestad.material-dialogs:commons:0.9.4.2'
+
+    // Date classes
+    implementation 'net.danlew:android.joda:2.9.9.2'
 
     // Android Tests
     androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion", {

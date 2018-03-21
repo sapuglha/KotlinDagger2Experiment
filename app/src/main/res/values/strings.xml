@@ -8,7 +8,7 @@
     <string name="lastname">Lastname</string>
     <string name="add">Add</string>
     <string name="comic">Comic</string>
-    <string name="previous_comic">Previous Comic</string>
+    <string name="previous_comic">Previous</string>
     <string name="action_manager_coming_soon">Coming Soon</string>
     <string name="action_manager_email_chooser_title">Email Apps</string>
     <string name="action_manager_email_failed">Email creation failed</string>
@@ -16,4 +16,5 @@
     <string name="auth_factory_fingerprint_decryption_failed">Fingerprint not recognized</string>
     <string name="comic_loading">Loading...</string>
     <string name="comic_error">Error!</string>
+    <string name="next_comic">Next</string>
 </resources>

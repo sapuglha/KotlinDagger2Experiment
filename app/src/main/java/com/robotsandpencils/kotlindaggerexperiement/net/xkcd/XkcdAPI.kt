@@ -1,6 +1,6 @@
 package com.robotsandpencils.kotlindaggerexperiement.net.xkcd
 
-import io.reactivex.Single
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -9,8 +9,8 @@ import retrofit2.http.Path
  */
 interface XkcdAPI {
     @GET("/info.0.json")
-    fun getLatestComic(): Single<XkcdResponse>
+    fun getLatestComic(): Observable<XkcdResponse>
 
     @GET("/{num}/info.0.json")
-    fun getComic(@Path("num") num: Int): Single<XkcdResponse>
+    fun getComic(@Path("num") num: Int): Observable<XkcdResponse>
 }

@@ -10,6 +10,7 @@ interface Contract {
      */
     interface Presenter : com.robotsandpencils.kotlindaggerexperiement.presentation.base.Presenter<View> {
         fun showPreviousComic()
+        fun showNextComic()
     }
 
     /**

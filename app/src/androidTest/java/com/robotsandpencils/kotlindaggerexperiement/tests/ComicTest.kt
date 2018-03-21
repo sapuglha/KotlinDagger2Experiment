@@ -37,8 +37,8 @@ class ComicTest : BaseTest() {
 
                 tapPreviousComic()
 
-                // Will error because there is only one HTTP request queued.
-                assertTitle("Error!")
+                // Will get a 404 and will not change the title
+                assertTitle("Real Estate")
             }
         }
     }

@@ -52,8 +52,12 @@ class ComicFragment : BaseFragment(), Contract.View {
             })
         }
 
-        previousButton.setOnClickListener {
+        previousButton?.setOnClickListener {
             presenter.showPreviousComic()
+        }
+
+        nextButton?.setOnClickListener {
+            presenter.showNextComic()
         }
     }
 
