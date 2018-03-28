@@ -1,6 +1,7 @@
-package com.robotsandpencils.kotlindaggerexperiement.net.xkcd
+package com.robotsandpencils.kotlinexperiment.data.api.xkcd
 
 import com.google.gson.annotations.SerializedName
+import com.robotsandpencils.kotlinexperiment.domain.entities.ComicEntity
 
 /*
 {
@@ -28,3 +29,7 @@ data class XkcdResponse(val month: String,
                         val img: String,
                         val title: String,
                         val day: String)
+
+fun XkcdResponse.toDomain(): ComicEntity {
+    return ComicEntity(this.title, this.num, this.img)
+}

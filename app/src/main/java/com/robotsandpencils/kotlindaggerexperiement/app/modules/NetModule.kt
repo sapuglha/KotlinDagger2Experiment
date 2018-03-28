@@ -11,7 +11,7 @@ import com.robotsandpencils.kotlindaggerexperiement.app.managers.PreferencesMana
 import com.robotsandpencils.kotlindaggerexperiement.app.model.Environment
 import com.robotsandpencils.kotlindaggerexperiement.app.model.Environments
 import com.robotsandpencils.kotlindaggerexperiement.app.repositories.AuthRepository
-import com.robotsandpencils.kotlindaggerexperiement.net.xkcd.XkcdAPI
+import com.robotsandpencils.kotlinexperiment.data.api.xkcd.ComicApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -26,17 +26,6 @@ import java.util.concurrent.TimeUnit
 
 @Module
 open class NetModule {
-
-    companion object {
-        val READ_TIMEOUT_MS: Long = 30000
-        val WRITE_TIMEOUT_MS: Long = 10000
-        val CONNECT_TIMEOUT_MS: Long = 10000
-        val CACHE_MAX_SIZE: Long = 100 * 1024 * 1024 // 100 MB
-
-        // Hook for providing test environment
-        var isUnderTest = false
-        lateinit var testBaseUrl: String
-    }
 
     @Provides
     @UserScope
@@ -98,7 +87,7 @@ open class NetModule {
     fun provideHttpClient(app: App,
                           authInterceptor: AuthenticationInterceptor): OkHttpClient {
         val level =
-                if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+                if (com.robotsandpencils.kotlinexperiment.data.BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
                 else HttpLoggingInterceptor.Level.NONE
 
         return OkHttpClient.Builder()
@@ -113,13 +102,24 @@ open class NetModule {
 
     @Provides
     @UserScope
-    fun provideXkcdApi(okHttpClient: OkHttpClient, env: Environment): XkcdAPI {
+    fun provideXkcdApi(okHttpClient: OkHttpClient, env: Environment): ComicApi {
         return Retrofit.Builder()
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(env.baseUrl)
                 .build()
-                .create(XkcdAPI::class.java)
+                .create(ComicApi::class.java)
+    }
+
+    companion object {
+        const val READ_TIMEOUT_MS: Long = 30000
+        const val WRITE_TIMEOUT_MS: Long = 10000
+        const val CONNECT_TIMEOUT_MS: Long = 10000
+        const val CACHE_MAX_SIZE: Long = 100 * 1024 * 1024 // 100 MB
+
+        // Hook for providing test environment
+        var isUnderTest = false
+        lateinit var testBaseUrl: String
     }
 }

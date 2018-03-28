@@ -1,19 +1,25 @@
 package com.robotsandpencils.kotlindaggerexperiement.presentation.comic
 
 import arrow.core.Either
-import com.robotsandpencils.kotlindaggerexperiement.domain.comic.ComicDomainModel
+import com.jakewharton.rxrelay2.PublishRelay
+import com.robotsandpencils.kotlindaggerexperiement.app.common.AsyncTransformer
 import com.robotsandpencils.kotlindaggerexperiement.presentation.base.BasePresenter
 import com.robotsandpencils.kotlindaggerexperiement.presentation.base.UiThreadQueue
+import com.robotsandpencils.kotlinexperiment.domain.entities.ComicEntity
+import com.robotsandpencils.kotlinexperiment.domain.repositories.ComicRepository
+import com.robotsandpencils.kotlinexperiment.domain.usecases.LoadsComic
 import retrofit2.HttpException
 import timber.log.Timber
 
-class Presenter(private val model: ComicDomainModel, uiThreadQueue: UiThreadQueue) :
+class Presenter(private val repository: ComicRepository, uiThreadQueue: UiThreadQueue) :
         BasePresenter<Contract.View>(uiThreadQueue), Contract.Presenter {
+
+    private val useCase = LoadsComic(AsyncTransformer(), repository)
+
+    private val comic: PublishRelay<Either<Throwable, ComicEntity>> = PublishRelay.create()
 
     override fun attach(view: Contract.View) {
         super.attach(view)
-
-        model.attach()
 
         view.getViewModel()?.let { viewModel ->
             val state = viewModel.state.value
@@ -29,13 +35,13 @@ class Presenter(private val model: ComicDomainModel, uiThreadQueue: UiThreadQueu
             }
         }
 
-        model.comic.subscribe {
+        comic.subscribe {
             when (it) {
                 is Either.Right -> {
                     val comic = it.b
                     updateViewModel(ComicState.ComicLoaded(
                             comic.title,
-                            comic.img,
+                            comic.url,
                             comic.number))
 
                 }
@@ -59,11 +65,6 @@ class Presenter(private val model: ComicDomainModel, uiThreadQueue: UiThreadQueu
         }.also {
             disposables.add(it)
         }
-    }
-
-    override fun detach() {
-        super.detach()
-        model.detach()
     }
 
     private fun updateViewModel(newState: ComicState) {
@@ -94,10 +95,28 @@ class Presenter(private val model: ComicDomainModel, uiThreadQueue: UiThreadQueu
     }
 
     private fun requestLatestComic() {
-        model.requestLatestComic()
+
+        useCase.getComic().subscribe(
+                {
+                    comic.accept(Either.Right(it))
+                },
+                { error ->
+                    comic.accept(Either.Left(error))
+                }
+        ).also {
+            disposables.add(it)
+        }
     }
 
     private fun requestComic(comicNumber: Int) {
-        model.requestComic(comicNumber)
+
+        useCase.getComic(comicNumber).subscribe(
+                { comic.accept(Either.Right(it)) },
+                {
+                    comic.accept(Either.Left(it))
+                })
+                .also {
+                    disposables.add(it)
+                }
     }
 }

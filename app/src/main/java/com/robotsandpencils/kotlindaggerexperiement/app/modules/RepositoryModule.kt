@@ -5,8 +5,9 @@ import com.robotsandpencils.kotlindaggerexperiement.app.db.AppDatabase
 import com.robotsandpencils.kotlindaggerexperiement.app.managers.PreferencesManager
 import com.robotsandpencils.kotlindaggerexperiement.app.repositories.AuthRepository
 import com.robotsandpencils.kotlindaggerexperiement.app.repositories.MainRepository
-import com.robotsandpencils.kotlindaggerexperiement.app.repositories.XkcdRepository
-import com.robotsandpencils.kotlindaggerexperiement.net.xkcd.XkcdAPI
+import com.robotsandpencils.kotlinexperiment.data.api.xkcd.ComicApi
+import com.robotsandpencils.kotlinexperiment.data.repositories.ComicRepositoryImpl
+import com.robotsandpencils.kotlinexperiment.domain.repositories.ComicRepository
 import dagger.Module
 import dagger.Provides
 
@@ -22,5 +23,5 @@ open class RepositoryModule {
 
     @Provides
     @UserScope
-    fun provideXkcdRepository(api: XkcdAPI) = XkcdRepository(api)
+    fun provideComicRepository(api: ComicApi): ComicRepository = ComicRepositoryImpl(api)
 }
