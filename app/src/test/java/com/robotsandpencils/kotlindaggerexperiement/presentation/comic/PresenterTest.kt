@@ -1,16 +1,11 @@
-package com.robotsandpencils.kotlindaggerexperiement.com.robotsandpencils.kotlindaggerexperiement.presentation.comic
+package com.robotsandpencils.kotlindaggerexperiement.presentation.comic
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
-import arrow.core.Either
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.nhaarman.mockitokotlin2.*
-import com.robotsandpencils.kotlindaggerexperiement.domain.comic.Comic
-import com.robotsandpencils.kotlindaggerexperiement.domain.comic.ComicDomainModel
 import com.robotsandpencils.kotlindaggerexperiement.presentation.base.UiThreadQueue
-import com.robotsandpencils.kotlindaggerexperiement.presentation.comic.ComicState
-import com.robotsandpencils.kotlindaggerexperiement.presentation.comic.ComicViewModel
-import com.robotsandpencils.kotlindaggerexperiement.presentation.comic.Contract
-import com.robotsandpencils.kotlindaggerexperiement.presentation.comic.Presenter
+import com.robotsandpencils.kotlinexperiment.domain.entities.ComicEntity
+import com.robotsandpencils.kotlinexperiment.domain.repositories.ComicRepository
 import io.reactivex.Observable
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
@@ -30,21 +25,22 @@ class PresenterTest {
     var rule: TestRule = InstantTaskExecutorRule()
 
     lateinit var presenter: Presenter
-    val domain = mock<ComicDomainModel>()
+    val repository = mock<ComicRepository>()
     val uiThreadQueue = mock<UiThreadQueue>()
     val view = mock<Contract.View>()
-    val comicObservable: Observable<Either<Throwable, Comic>> = BehaviorRelay.create()
+    val comicObservable: Observable<ComicEntity> = BehaviorRelay.create()
 
     @Before
     fun before() {
-        presenter = Presenter(domain, uiThreadQueue)
+        presenter = Presenter(repository, uiThreadQueue)
 
         RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
         RxJavaPlugins.setComputationSchedulerHandler { Schedulers.trampoline() }
         RxJavaPlugins.setNewThreadSchedulerHandler { Schedulers.trampoline() }
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
 
-        whenever(domain.comic).thenReturn(comicObservable)
+        whenever(repository.getComic()).thenReturn(comicObservable)
+        whenever(repository.getComic(any())).thenReturn(comicObservable)
         /*
         whenever(domain.requestLatestComic()).thenReturn(
                 Single.just(Either.Right(
@@ -67,7 +63,7 @@ class PresenterTest {
         whenever(view.getViewModel()).thenReturn(null)
         presenter.attach(view)
 
-        verify(domain).attach()
+        verifyZeroInteractions(repository)
     }
 
     @Test
@@ -77,7 +73,7 @@ class PresenterTest {
 
         presenter.attach(view)
 
-        verify(domain, Times(1)).requestLatestComic()
+        verify(repository).getComic()
     }
 
     @Test
@@ -89,7 +85,7 @@ class PresenterTest {
         presenter.attach(view)
 
         val captor: KArgumentCaptor<Int> = argumentCaptor()
-        verify(domain, Times(1)).requestComic(captor.capture())
+        verify(repository, Times(1)).getComic(captor.capture())
 
         Assert.assertThat(captor.firstValue, `is`(10))
     }
@@ -107,7 +103,7 @@ class PresenterTest {
         presenter.showPreviousComic()
 
         val captor: KArgumentCaptor<Int> = argumentCaptor()
-        verify(domain, Times(1)).requestComic(captor.capture())
+        verify(repository, Times(1)).getComic(captor.capture())
 
         Assert.assertThat(captor.firstValue, `is`(9))
     }
