@@ -1,7 +1,7 @@
 package com.robotsandpencils.kotlindaggerexperiement.presentation.main
 
 import android.support.annotation.StringRes
-import com.robotsandpencils.kotlindaggerexperiement.app.db.User
+import com.robotsandpencils.kotlinexperiment.domain.entities.UserEntity
 
 /**
  * Main Contract
@@ -15,7 +15,7 @@ interface Contract {
         fun attach(view: View)
         fun detach()
         fun addUser(id: String, firstName: String, lastName: String)
-        fun removeUser(user: User)
+        fun removeUser(user: UserEntity)
         fun navigate(id: Int): Boolean
     }
 
@@ -24,7 +24,7 @@ interface Contract {
      */
     interface View : com.robotsandpencils.kotlindaggerexperiement.presentation.base.View {
         fun getViewModel(): MainViewModel?
-        fun setTitle(text : String)
+        fun setTitle(text: String)
         fun setTitle(@StringRes text: Int)
         fun clearFields()
         fun showError(message: String?)

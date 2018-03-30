@@ -6,20 +6,9 @@ import com.robotsandpencils.kotlinexperiment.common.TestTransformer
 import com.robotsandpencils.kotlinexperiment.domain.entities.ComicEntity
 import com.robotsandpencils.kotlinexperiment.domain.repositories.ComicRepository
 import io.reactivex.Observable
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 
 class LoadsComicTest {
-
-    @Before
-    fun setUp() {
-
-    }
-
-    @After
-    fun tearDown() {
-    }
 
     @Test
     fun getComic() {
@@ -32,9 +21,5 @@ class LoadsComicTest {
         useCase.getComic().test()
                 .assertComplete()
                 .assertValueCount(1)
-    }
-
-    @Test
-    fun getComic1() {
     }
 }

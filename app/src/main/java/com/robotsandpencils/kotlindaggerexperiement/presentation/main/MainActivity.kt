@@ -7,9 +7,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.robotsandpencils.kotlindaggerexperiement.R
-import com.robotsandpencils.kotlindaggerexperiement.app.db.User
 import com.robotsandpencils.kotlindaggerexperiement.app.extensions.initializeWithLinearLayout
 import com.robotsandpencils.kotlindaggerexperiement.presentation.base.BaseActivity
+import com.robotsandpencils.kotlinexperiment.domain.entities.UserEntity
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.Section
@@ -106,7 +106,7 @@ class MainActivity : BaseActivity(), Contract.View {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
-    private fun getUserItems(users: List<User>?): List<Item<ViewHolder>> {
+    private fun getUserItems(users: List<UserEntity>?): List<Item<ViewHolder>> {
         val items = ArrayList<UserItem>()
 
         users?.forEach { user ->

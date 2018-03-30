@@ -1,12 +1,12 @@
 package com.robotsandpencils.kotlindaggerexperiement.presentation.main
 
 import com.robotsandpencils.kotlindaggerexperiement.R
-import com.robotsandpencils.kotlindaggerexperiement.app.db.User
+import com.robotsandpencils.kotlinexperiment.domain.entities.UserEntity
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.item_user.view.*
 
-class UserItem(internal val user: User) : Item<ViewHolder>(user.uid.toLong()) {
+class UserItem(internal val user: UserEntity) : Item<ViewHolder>(user.uid.toLong()) {
 
     override fun getLayout(): Int {
         return R.layout.item_user

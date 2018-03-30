@@ -1,8 +1,8 @@
 package com.robotsandpencils.kotlindaggerexperiement.presentation.counter
 
-import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 
 class CounterViewModel : ViewModel() {
-    lateinit var count: LiveData<Int>
+    var count: MutableLiveData<Int> = MutableLiveData()
 }

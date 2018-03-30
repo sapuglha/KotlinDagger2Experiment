@@ -4,10 +4,11 @@ import com.robotsandpencils.kotlindaggerexperiement.App
 import com.robotsandpencils.kotlindaggerexperiement.app.db.AppDatabase
 import com.robotsandpencils.kotlindaggerexperiement.app.managers.PreferencesManager
 import com.robotsandpencils.kotlindaggerexperiement.app.repositories.AuthRepository
-import com.robotsandpencils.kotlindaggerexperiement.app.repositories.MainRepository
 import com.robotsandpencils.kotlinexperiment.data.api.xkcd.ComicApi
 import com.robotsandpencils.kotlinexperiment.data.repositories.ComicRepositoryImpl
+import com.robotsandpencils.kotlinexperiment.data.repositories.UserRepositoryImpl
 import com.robotsandpencils.kotlinexperiment.domain.repositories.ComicRepository
+import com.robotsandpencils.kotlinexperiment.domain.repositories.UserRepository
 import dagger.Module
 import dagger.Provides
 
@@ -19,7 +20,7 @@ open class RepositoryModule {
 
     @Provides
     @UserScope
-    fun provideMainRepository(app: App, database: AppDatabase) = MainRepository(app, database)
+    fun provideUserRepository(database: AppDatabase): UserRepository = UserRepositoryImpl(database)
 
     @Provides
     @UserScope

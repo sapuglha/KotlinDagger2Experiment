@@ -1,19 +1,19 @@
 package com.robotsandpencils.kotlindaggerexperiement.app.db
 
-import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
+import io.reactivex.Flowable
 
 @Dao
 interface UserDao {
 
     @Query("SELECT count(*) FROM user")
-    fun getCount(): LiveData<Int>
+    fun getCount(): Flowable<Int>
 
     @Query("SELECT * FROM user")
-    fun getAll(): LiveData<List<User>>
+    fun getAll(): Flowable<List<User>>
 
     @Query("SELECT * FROM user WHERE uid IN (:userIds)")
     fun loadAllByIds(userIds: IntArray): List<User>

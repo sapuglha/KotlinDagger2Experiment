@@ -2,10 +2,12 @@ package com.robotsandpencils.kotlindaggerexperiement.presentation.main
 
 import android.util.Log
 import com.robotsandpencils.kotlindaggerexperiement.R
-import com.robotsandpencils.kotlindaggerexperiement.app.db.User
-import com.robotsandpencils.kotlindaggerexperiement.app.repositories.MainRepository
+import com.robotsandpencils.kotlindaggerexperiement.app.common.AsyncTransformer
 import com.robotsandpencils.kotlindaggerexperiement.presentation.base.BasePresenter
 import com.robotsandpencils.kotlindaggerexperiement.presentation.base.UiThreadQueue
+import com.robotsandpencils.kotlinexperiment.domain.entities.UserEntity
+import com.robotsandpencils.kotlinexperiment.domain.repositories.UserRepository
+import com.robotsandpencils.kotlinexperiment.domain.usecases.ManageUsers
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.async
 
@@ -13,23 +15,28 @@ import kotlinx.coroutines.experimental.async
  * A super simple presenter
  */
 
-class Presenter(private val mainRepository: MainRepository, uiThreadQueue: UiThreadQueue) :
+class Presenter(repository: UserRepository, uiThreadQueue: UiThreadQueue) :
         BasePresenter<Contract.View>(uiThreadQueue), Contract.Presenter {
+
+    private val manageUsers = ManageUsers(AsyncTransformer(), repository)
 
     override fun attach(view: Contract.View) {
         super.attach(view)
 
         view.setTitle("Presenter Attached")
 
-        val viewModel = view.getViewModel()
-        viewModel?.users = mainRepository.getUserDao().getAll()
+        manageUsers.getUsers().subscribe {
+            view.getViewModel()?.apply {
+                users.postValue(it)
+            }
+        }
     }
 
     override fun addUser(id: String, firstName: String, lastName: String) {
         // Use Coroutines to rn this in the background and then do something on the UI
         // thread if successful.
         val deferred = async(CommonPool) {
-            mainRepository.getUserDao().insertAll(User(id.toInt(), firstName, lastName))
+            manageUsers.addUsers(UserEntity(id.toInt(), firstName, lastName))
             uiThreadQueue.run(Runnable {
                 view?.setTitle("Record Added")
                 view?.clearFields()
@@ -48,9 +55,9 @@ class Presenter(private val mainRepository: MainRepository, uiThreadQueue: UiThr
         }
     }
 
-    override fun removeUser(user: User) {
+    override fun removeUser(user: UserEntity) {
         async(CommonPool) {
-            mainRepository.getUserDao().delete(user)
+            manageUsers.deleteUser(user)
 
             uiThreadQueue.run(Runnable {
                 view?.setTitle("Record Deleted")
