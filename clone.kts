@@ -58,28 +58,14 @@ fun clone(newRoot: String, packageName: String) {
 
                 // Get the file contents
                 if (it.extension in arrayOf("kt", "java", "xml", "gradle")) {
-                    val contents = it.readLines(Charset.forName("utf-8")).asSequence()
-
-                    val newContents = contents.map {
-                        it.replace("com.robotsandpencils.kotlindaggerexperiement", packageName)
-                                .replace("com.robotsandpencils.kotlinexperiment", packageName)
-                    }
-
-                    newFile.printWriter(Charset.forName("utf-8")).use { out ->
-                        newContents.forEach {
-                            out.println(it)
-                        }
-                    }
+                    copyAndMapPackages(it, newFile, packageName)
                 } else if (it.isFile) {
                     it.copyTo(newFile, true, 4096)
                 }
 
                 println("Creating ${newFile.path}")
             }
-
-
 }
-
 
 fun emptyDirectory(dir: File): Boolean {
     return if (dir.isDirectory) {
@@ -88,6 +74,25 @@ fun emptyDirectory(dir: File): Boolean {
         dir.walkBottomUp().maxDepth(1).firstOrNull { it.isFile } == null
     } else {
         false
+    }
+}
+
+fun copyAndMapPackages(from: File, to: File, newPackage: String) {
+    val contents = from.readLines(Charset.forName("utf-8")).asSequence()
+
+    val newAppName = newPackage.splitToSequence(delimiters = *arrayOf(".")).last().capitalize()
+
+    val newContents = contents.map {
+        it.replace("com.robotsandpencils.kotlindaggerexperiement", newPackage)
+                .replace("com.robotsandpencils.kotlinexperiment", newPackage)
+                .replace("""<string name="app_name">KotlinDaggerExperiement</string>""",
+                        """<string name="app_name">$newAppName</string>""")
+    }
+
+    to.printWriter(Charset.forName("utf-8")).use { out ->
+        newContents.forEach {
+            out.println(it)
+        }
     }
 }
 
