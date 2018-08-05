@@ -41,10 +41,10 @@ dependencies {
     implementation rootProject.ext.retrofitRxJava2Adapter
     implementation rootProject.ext.room
     implementation rootProject.ext.roomRx
-    kapt "android.arch.persistence.room:compiler:1.0.0"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
 
     testImplementation rootProject.ext.junit
     testImplementation rootProject.ext.mockito
     androidTestImplementation rootProject.ext.androidTestRunner
-    testImplementation "android.arch.persistence.room:testing:1.0.0"
+    testImplementation "android.arch.persistence.room:testing:1.1.1"
 }
