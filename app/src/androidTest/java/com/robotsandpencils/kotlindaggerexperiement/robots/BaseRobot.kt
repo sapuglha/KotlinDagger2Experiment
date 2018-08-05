@@ -68,7 +68,7 @@ abstract class BaseRobot {
         scrollToPosition(ViewMatchers.withId(R.id.list), position)
     }
 
-    fun getTextByTag(@IdRes id: Int, tag: String) = componentInTagged(ViewMatchers.withId(id), R.id.tag_test, Matchers.equalTo(tag))
+//    fun getTextByTag(@IdRes id: Int, tag: String) = componentInTagged(ViewMatchers.withId(id), R.id.tag_test, Matchers.equalTo(tag))
 
     fun assertDialogText(title: Matcher<String>, message: Matcher<String>) {
         Espresso.onView(ViewMatchers.withId(R.id.md_title)).check(ViewAssertions.matches(ViewMatchers.withText(title)))
