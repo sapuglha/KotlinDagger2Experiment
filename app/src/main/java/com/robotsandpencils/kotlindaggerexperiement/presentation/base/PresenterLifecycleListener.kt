@@ -1,8 +1,8 @@
 package com.robotsandpencils.kotlindaggerexperiement.presentation.base
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 
 class PresenterLifecycleListener<V : View, out P : Presenter<V>>(
         val lifecycle: Lifecycle,

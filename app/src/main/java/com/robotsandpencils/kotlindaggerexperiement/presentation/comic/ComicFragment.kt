@@ -1,6 +1,6 @@
 package com.robotsandpencils.kotlindaggerexperiement.presentation.comic
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

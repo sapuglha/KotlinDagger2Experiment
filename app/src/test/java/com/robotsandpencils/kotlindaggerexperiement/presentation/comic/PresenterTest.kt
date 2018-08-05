@@ -1,6 +1,6 @@
 package com.robotsandpencils.kotlindaggerexperiement.presentation.comic
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.nhaarman.mockitokotlin2.*
 import com.robotsandpencils.kotlindaggerexperiement.presentation.base.UiThreadQueue

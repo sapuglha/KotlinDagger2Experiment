@@ -1,6 +1,6 @@
 package com.robotsandpencils.kotlindaggerexperiement
 
-import android.support.test.InstrumentationRegistry
+import androidx.test.InstrumentationRegistry
 
 class TestHelper {
     companion object {

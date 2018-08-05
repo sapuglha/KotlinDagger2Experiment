@@ -1,7 +1,7 @@
 package com.robotsandpencils.kotlindaggerexperiement.base
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.IdlingRegistry
+import androidx.test.InstrumentationRegistry
+import androidx.test.espresso.IdlingRegistry
 import com.jakewharton.espresso.OkHttp3IdlingResource
 import com.robotsandpencils.kotlindaggerexperiement.TestApp
 import com.robotsandpencils.kotlindaggerexperiement.TestHelper

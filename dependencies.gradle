@@ -1,24 +1,24 @@
 ext {
     // Android
     minSdkVersion = 21
-    targetSdkVersion = 27
+    targetSdkVersion = 28
     testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 
-    androidSupportLibVersion = "27.1.1"
+    androidSupportLibVersion = "28.0.0-alpha1"
 
-    supportVersion = "27.1.1"
-    archVersion = "1.1.1"
-    archVersionA = "1.1.1"
+    supportVersion = '1.0.0-beta01'
+    archVersion = '2.0.0-beta01'
+    archVersionA = '2.0.0-beta01'
     daggerVersion = "2.16"
     ankoVersion = "0.10.1"
     groupieVersion = "2.0.0"
     mockitoVersion = "2.15.0"
-    espressoVersion = "3.0.1"
+    espressoVersion = '3.1.0-alpha3'
     okhttpVersion = "3.11.0"
     arrowVersion = "0.6.1"
 
-    room = "android.arch.persistence.room:runtime:1.1.1"
-    roomRx = "android.arch.persistence.room:rxjava2:1.1.1"
+    room = 'androidx.room:room-runtime:2.0.0-beta01'
+    roomRx = 'androidx.room:room-rxjava2:2.0.0-beta01'
     rxJava = "io.reactivex.rxjava2:rxjava:2.1.6"
     dagger = "com.google.dagger:dagger:$daggerVersion"
     daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
@@ -32,5 +32,5 @@ ext {
     // Testing
     junit = "junit:junit:4.12"
     mockito = "org.mockito:mockito-core:2.8.47"
-    androidTestRunner = "com.android.support.test:runner:1.0.1"
+    androidTestRunner = 'androidx.test:runner:1.1.0-alpha3'
 }

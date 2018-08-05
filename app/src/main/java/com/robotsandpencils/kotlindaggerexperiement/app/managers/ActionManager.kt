@@ -4,11 +4,11 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.annotation.StringRes
-import android.support.customtabs.CustomTabsIntent
-import android.support.design.widget.BaseTransientBottomBar
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat.getColor
+import androidx.annotation.StringRes
+import androidx.browser.customtabs.CustomTabsIntent
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
+import androidx.core.content.ContextCompat.getColor
 import android.view.View
 import android.widget.Toast
 import com.robotsandpencils.kotlindaggerexperiement.R

@@ -1,7 +1,7 @@
 package com.robotsandpencils.kotlindaggerexperiement.tests
 
-import android.support.test.espresso.IdlingRegistry
-import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
+import androidx.test.espresso.IdlingRegistry
+import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import com.robotsandpencils.kotlindaggerexperiement.base.BaseTest
 import com.robotsandpencils.kotlindaggerexperiement.robots.app
 import com.squareup.picasso.PicassoIdlingResource

@@ -1,7 +1,7 @@
 package com.robotsandpencils.kotlindaggerexperiement.presentation.main
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.robotsandpencils.kotlinexperiment.domain.entities.UserEntity
 
 class MainViewModel : ViewModel() {

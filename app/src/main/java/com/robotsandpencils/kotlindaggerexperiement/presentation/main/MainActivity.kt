@@ -1,8 +1,8 @@
 package com.robotsandpencils.kotlindaggerexperiement.presentation.main
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.util.Log
 import android.view.View
 import android.widget.Toast

@@ -2,8 +2,8 @@ package com.robotsandpencils.kotlindaggerexperiement
 
 import android.app.Activity
 import android.app.Application
-import android.support.annotation.VisibleForTesting
-import android.support.v4.app.Fragment
+import androidx.annotation.VisibleForTesting
+import androidx.fragment.app.Fragment
 import com.robotsandpencils.kotlindaggerexperiement.app.modules.AppComponent
 import com.robotsandpencils.kotlindaggerexperiement.app.modules.AppModule
 import com.robotsandpencils.kotlindaggerexperiement.app.modules.DaggerAppComponent

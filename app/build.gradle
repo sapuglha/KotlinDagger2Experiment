@@ -17,11 +17,11 @@ def vName = androidGitVersion.name()
 def vCode = androidGitVersion.code()
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.robotsandpencils.kotlindaggerexperiement"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 28
 
         // See: https://github.com/gladed/gradle-android-git-version.
         versionName vName
@@ -64,11 +64,11 @@ configurations.all {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.android.support:appcompat-v7:$supportVersion"
-    implementation "com.android.support:design:$supportVersion"
-    implementation "com.android.support:customtabs:$supportVersion"
-    implementation "com.android.support:cardview-v7:$supportVersion"
-    implementation 'com.android.support.constraint:constraint-layout:2.0.0-alpha1'
+    implementation "androidx.appcompat:appcompat:$supportVersion"
+    implementation "com.google.android.material:material:$supportVersion"
+    implementation "androidx.browser:browser:$supportVersion"
+    implementation "androidx.cardview:cardview:$supportVersion"
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
 
     implementation project(":data")
     implementation project(":domain")
@@ -91,13 +91,13 @@ dependencies {
     implementation 'com.mtramin:rxfingerprint:2.1.0'
 
     // Architecture Components
-    implementation "android.arch.lifecycle:runtime:$archVersion"
-    implementation "android.arch.lifecycle:extensions:$archVersion"
-    implementation "android.arch.persistence.room:runtime:$archVersionA"
-    implementation "android.arch.persistence.room:rxjava2:$archVersionA"
-    kapt "android.arch.lifecycle:compiler:$archVersionA"
-    kapt "android.arch.persistence.room:compiler:$archVersionA"
-    testImplementation "android.arch.persistence.room:testing:$archVersionA"
+    implementation "androidx.lifecycle:lifecycle-runtime:$archVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$archVersion"
+    implementation "androidx.room:room-runtime:$archVersionA"
+    implementation "androidx.room:room-rxjava2:$archVersionA"
+    kapt "androidx.lifecycle:lifecycle-compiler:$archVersionA"
+    kapt "androidx.room:room-compiler:$archVersionA"
+    testImplementation "androidx.room:room-testing:$archVersionA"
 
     // Groupie
     implementation "com.xwray:groupie:$groupieVersion"
@@ -119,7 +119,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
     // KTX
-    implementation 'androidx.core:core-ktx:0.3'
+    implementation 'androidx.core:core-ktx:1.0.0-beta01'
 
     // Arrow
     implementation "io.arrow-kt:arrow-core:$arrowVersion"
@@ -132,10 +132,10 @@ dependencies {
     implementation 'net.danlew:android.joda:2.9.9.2'
 
     // Android Tests
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion", {
+    androidTestImplementation("androidx.test.espresso:espresso-core:$espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
 
     androidTestImplementation("com.squareup.okhttp3:mockwebserver:$okhttpVersion") {
         exclude group: 'org.bouncycastle'
@@ -151,7 +151,7 @@ dependencies {
     kaptAndroidTest "com.google.dagger:dagger-android-processor:$daggerVersion"
 
     androidTestImplementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
-    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.3'
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0-alpha3'
     androidTestImplementation 'com.github.tmurakami:dexopener:0.12.1'
 
     // Unit Tests
@@ -162,5 +162,5 @@ dependencies {
         exclude group: 'org.jetbrains.kotlin'
     }
 
-    testImplementation "android.arch.core:core-testing:$archVersionA"
+    testImplementation "androidx.arch.core:core-testing:$archVersionA"
 }

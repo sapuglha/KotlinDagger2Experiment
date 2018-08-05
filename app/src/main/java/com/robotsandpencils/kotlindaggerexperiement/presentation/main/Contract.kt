@@ -1,6 +1,6 @@
 package com.robotsandpencils.kotlindaggerexperiement.presentation.main
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import com.robotsandpencils.kotlinexperiment.domain.entities.UserEntity
 
 /**

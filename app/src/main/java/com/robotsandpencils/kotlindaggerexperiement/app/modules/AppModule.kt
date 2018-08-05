@@ -1,6 +1,6 @@
 package com.robotsandpencils.kotlindaggerexperiement.app.modules
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import com.robotsandpencils.kotlindaggerexperiement.App
 import com.robotsandpencils.kotlinexperiment.data.db.AppDatabase
 import com.robotsandpencils.kotlindaggerexperiement.app.managers.PreferencesManager
