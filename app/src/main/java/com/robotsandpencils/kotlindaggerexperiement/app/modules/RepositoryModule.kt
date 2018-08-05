@@ -1,7 +1,7 @@
 package com.robotsandpencils.kotlindaggerexperiement.app.modules
 
 import com.robotsandpencils.kotlindaggerexperiement.App
-import com.robotsandpencils.kotlindaggerexperiement.app.db.AppDatabase
+import com.robotsandpencils.kotlinexperiment.data.db.AppDatabase
 import com.robotsandpencils.kotlindaggerexperiement.app.managers.PreferencesManager
 import com.robotsandpencils.kotlindaggerexperiement.app.repositories.AuthRepository
 import com.robotsandpencils.kotlinexperiment.data.api.xkcd.ComicApi

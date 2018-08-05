@@ -1,8 +1,8 @@
 package com.robotsandpencils.kotlinexperiment.data.repositories
 
-import com.robotsandpencils.kotlindaggerexperiement.app.db.AppDatabase
-import com.robotsandpencils.kotlindaggerexperiement.app.db.toData
-import com.robotsandpencils.kotlindaggerexperiement.app.db.toDomain
+import com.robotsandpencils.kotlinexperiment.data.db.AppDatabase
+import com.robotsandpencils.kotlinexperiment.data.db.toData
+import com.robotsandpencils.kotlinexperiment.data.db.toDomain
 import com.robotsandpencils.kotlinexperiment.domain.entities.UserEntity
 import com.robotsandpencils.kotlinexperiment.domain.repositories.UserRepository
 import io.reactivex.Observable

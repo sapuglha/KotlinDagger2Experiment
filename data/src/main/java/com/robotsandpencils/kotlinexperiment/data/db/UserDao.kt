@@ -1,4 +1,4 @@
-package com.robotsandpencils.kotlindaggerexperiement.app.db
+package com.robotsandpencils.kotlinexperiment.data.db
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete
