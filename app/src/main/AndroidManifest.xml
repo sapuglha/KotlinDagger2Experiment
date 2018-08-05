@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.robotsandpencils.kotlindaggerexperiement">
+          package="com.robotsandpencils.kotlindaggerexperiment">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -11,9 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".App">
+        android:name="com.robotsandpencils.kotlindaggerexperiment.App">
         <activity
-            android:name=".presentation.main.MainActivity"
+            android:name="com.robotsandpencils.kotlindaggerexperiment.presentation.main.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme">

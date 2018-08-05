@@ -6,7 +6,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.robotsandpencils.kotlindaggerexperiement.presentation.main.MainActivity">
+    tools:context="com.robotsandpencils.kotlindaggerexperiment.presentation.main.MainActivity">
 
     <TextView
         android:id="@+id/message"
@@ -115,7 +115,7 @@
 
         <fragment
             android:id="@+id/countFragment"
-            class="com.robotsandpencils.kotlindaggerexperiement.presentation.counter.CounterFragment"
+            class="com.robotsandpencils.kotlindaggerexperiment.presentation.counter.CounterFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
@@ -139,7 +139,7 @@
 
         <fragment
             android:id="@+id/comicFragment"
-            class="com.robotsandpencils.kotlindaggerexperiement.presentation.comic.ComicFragment"
+            class="com.robotsandpencils.kotlindaggerexperiment.presentation.comic.ComicFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
