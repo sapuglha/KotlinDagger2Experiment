@@ -23,7 +23,6 @@ import javax.inject.Inject
 open class App : Application(), HasActivityInjector, HasSupportFragmentInjector {
     @Inject
     internal lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
-
     @Inject
     internal lateinit var dispatchingFragmentInjector: DispatchingAndroidInjector<Fragment>
 

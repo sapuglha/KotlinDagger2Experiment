@@ -1,11 +1,11 @@
 package com.robotsandpencils.kotlindaggerexperiement.app.managers
 
-import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent.FLAG_CANCEL_CURRENT
 import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListAdapter
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListItem
@@ -18,7 +18,7 @@ import timber.log.Timber
 class EnvironmentManager(private val app: App,
                          private val environments: Environments,
                          private val preferencesManager: PreferencesManager) {
-    fun selectEnvironment(activity: Activity) {
+    fun selectEnvironment(activity: AppCompatActivity) {
         val adapter = MaterialSimpleListAdapter { dialog, index, _ ->
             val environment = environments.environments[index]
             preferencesManager.putString("selected_environment", environment.name)

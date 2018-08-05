@@ -1,6 +1,5 @@
 package com.robotsandpencils.kotlindaggerexperiement.app.extensions
 
-import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.os.Trace
@@ -14,6 +13,7 @@ import android.text.method.LinkMovementMethod
 import android.util.Base64
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.robotsandpencils.kotlindaggerexperiement.R
 import java.nio.charset.StandardCharsets
 import java.util.*
@@ -25,8 +25,8 @@ import kotlin.experimental.and
  *
  * @param this@hideSoftKeyboard the activity that has the focus
  */
-fun Activity.hideSoftKeyboard() {
-    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+fun AppCompatActivity.hideSoftKeyboard() {
+    val inputMethodManager = getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
     val windowToken = currentFocus?.windowToken ?: return
     inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
 }

@@ -119,7 +119,7 @@ class MainActivity : BaseActivity(), Contract.View {
     override fun clearFields() {
         idNumber.requestFocus()
         arrayOf(idNumber.text, firstName.text, lastName.text)
-                .forEach { it.clear() }
+                .forEach { it?.clear() }
     }
 
     override fun onDestroy() {
