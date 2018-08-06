@@ -8,8 +8,8 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -29,22 +29,26 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
     implementation project(":domain")
 
-    kapt rootProject.ext.daggerCompiler
+    implementation rootProject.ext.kotlinStdlib
+
+    implementation rootProject.ext.androidX_room
+    implementation rootProject.ext.androidX_room_rx
+    testImplementation rootProject.ext.androidX_room_testing
+    kapt rootProject.ext.androidX_room_compiler
+
     implementation rootProject.ext.dagger
+    kapt rootProject.ext.dagger_compiler
+
     implementation rootProject.ext.rxJava
+
     implementation rootProject.ext.retrofit
     implementation rootProject.ext.retrofitGsonConverter
     implementation rootProject.ext.retrofitRxJava2Adapter
-    implementation rootProject.ext.room
-    implementation rootProject.ext.roomRx
-    kapt 'androidx.room:room-compiler:2.0.0-beta01'
 
     testImplementation rootProject.ext.junit
-    testImplementation rootProject.ext.mockito
-    androidTestImplementation rootProject.ext.androidTestRunner
-    testImplementation 'androidx.room:room-testing:2.0.0-beta01'
+    testImplementation rootProject.ext.mockito_core
+    androidTestImplementation rootProject.ext.androidx_test_runner
+    testImplementation rootProject.ext.androidX_room_testing
 }

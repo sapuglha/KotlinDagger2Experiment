@@ -20,8 +20,8 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.robotsandpencils.kotlindaggerexperiement"
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
 
         // See: https://github.com/gladed/gradle-android-git-version.
         versionName vName
@@ -47,15 +47,7 @@ kotlin {
     }
 }
 
-ext {
-
-}
-
 configurations.all {
-    resolutionStrategy.force "com.android.support:support-annotations:$supportVersion"
-    resolutionStrategy.force "com.android.support:support-v13:$supportVersion"
-    resolutionStrategy.force "com.android.support:support-fragment:$supportVersion"
-    resolutionStrategy.force "com.android.support:preference-v14:$supportVersion"
     resolutionStrategy.force "com.google.dagger:dagger:$daggerVersion"
     resolutionStrategy.force "com.squareup.okhttp3:okhttp:$okhttpVersion"
     resolutionStrategy.force "junit:junit:4.12"
@@ -64,40 +56,45 @@ configurations.all {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.appcompat:appcompat:$supportVersion"
-    implementation "com.google.android.material:material:$supportVersion"
-    implementation "androidx.browser:browser:$supportVersion"
-    implementation "androidx.cardview:cardview:$supportVersion"
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
 
     implementation project(":data")
     implementation project(":domain")
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.google.android.material:material:$materialComponentsVersion"
+
+    implementation rootProject.ext.androidX_appCompat
+    implementation rootProject.ext.androidX_browser
+    implementation rootProject.ext.androidX_cardView
+    implementation rootProject.ext.androidX_constraintLayout
+
+    // KTX
+    implementation rootProject.ext.androidX_core_ktx
+
+    implementation rootProject.ext.kotlinStdlib
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.18"
 
     // Dagger 2 and Dagger Android
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation "com.google.dagger:dagger-android:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    implementation rootProject.ext.dagger
+    implementation rootProject.ext.dagger_android
+    implementation rootProject.ext.dagger_android_support
+    kapt rootProject.ext.dagger_compiler
+    kapt rootProject.ext.dagger_android_processor
 
     // RXJava
-    implementation "io.reactivex.rxjava2:rxjava:2.1.9"
-    implementation "io.reactivex.rxjava2:rxkotlin:2.2.0"
-    implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
+    implementation rootProject.ext.rxJava
+    implementation rootProject.ext.rxJava_rxkotlin
+    implementation rootProject.ext.rxJava_rxandroid
     implementation 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
     implementation 'com.mtramin:rxfingerprint:2.1.0'
 
     // Architecture Components
-    implementation "androidx.lifecycle:lifecycle-runtime:$archVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$archVersion"
-    implementation "androidx.room:room-runtime:$archVersionA"
-    implementation "androidx.room:room-rxjava2:$archVersionA"
-    kapt "androidx.lifecycle:lifecycle-compiler:$archVersionA"
-    kapt "androidx.room:room-compiler:$archVersionA"
-    testImplementation "androidx.room:room-testing:$archVersionA"
+    implementation rootProject.ext.androidX_lifeCycle
+    implementation rootProject.ext.androidX_lifeCycle_extensions
+    implementation rootProject.ext.androidX_room
+    implementation rootProject.ext.androidX_room_rx
+    kapt rootProject.ext.androidX_lifeCycle_compiler
+    kapt rootProject.ext.androidX_room_compiler
+    testImplementation rootProject.ext.androidX_room_testing
 
     // Groupie
     implementation "com.xwray:groupie:$groupieVersion"
@@ -109,17 +106,14 @@ dependencies {
     implementation 'com.scottyab:secure-preferences-lib:0.1.4'
 
     // Retrofit 2
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation rootProject.ext.retrofit
+    implementation rootProject.ext.retrofitRxJava2Adapter
+    implementation rootProject.ext.retrofitGsonConverter
+    implementation rootProject.ext.gson
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
 
     // Image loading
-    implementation 'com.squareup.picasso:picasso:2.5.2'
-
-    // KTX
-    implementation 'androidx.core:core-ktx:1.0.0-beta01'
+    implementation rootProject.ext.picasso
 
     // Arrow
     implementation "io.arrow-kt:arrow-core:$arrowVersion"
@@ -132,35 +126,37 @@ dependencies {
     implementation 'net.danlew:android.joda:2.9.9.2'
 
     // Android Tests
-    androidTestImplementation("androidx.test.espresso:espresso-core:$espressoVersion", {
+    androidTestImplementation rootProject.ext.androidx_test_runner
+    androidTestImplementation rootProject.ext.androidx_test_rules
+    androidTestImplementation(rootProject.ext.androidx_test_espresso_core, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    androidTestImplementation rootProject.ext.androidx_test_espresso_contrib
 
     androidTestImplementation("com.squareup.okhttp3:mockwebserver:$okhttpVersion") {
         exclude group: 'org.bouncycastle'
     }
     androidTestImplementation 'com.squareup.rx.idler:rx2-idler:0.9.0'
-    androidTestImplementation('com.nhaarman:mockito-kotlin-kt1.1:1.5.0') {
+    androidTestImplementation(rootProject.ext.mockito_kotlin2) {
         exclude group: 'org.jetbrains.kotlin'
     }
-    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
-    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
+    androidTestImplementation rootProject.ext.mockito_core
+    androidTestImplementation rootProject.ext.mockito_android
 
-    kaptAndroidTest "com.google.dagger:dagger-compiler:$daggerVersion"
-    kaptAndroidTest "com.google.dagger:dagger-android-processor:$daggerVersion"
+    kaptAndroidTest rootProject.ext.dagger_compiler
+    kaptAndroidTest rootProject.ext.dagger_android_processor
 
     androidTestImplementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
-    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0-alpha3'
+    androidTestImplementation rootProject.ext.androidx_test_uiautomator
     androidTestImplementation 'com.github.tmurakami:dexopener:0.12.1'
 
     // Unit Tests
-    testImplementation 'junit:junit:4.12'
+    testImplementation rootProject.ext.junit
     testImplementation 'org.hamcrest:hamcrest-junit:2.0.0.0'
-    testImplementation "org.mockito:mockito-core:$mockitoVersion"
-    testImplementation('com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-alpha03') {
+    testImplementation rootProject.ext.mockito_core
+    testImplementation(rootProject.ext.mockito_kotlin2) {
         exclude group: 'org.jetbrains.kotlin'
     }
 
-    testImplementation "androidx.arch.core:core-testing:$archVersionA"
+    testImplementation rootProject.ext.androidX_core_testing
 }

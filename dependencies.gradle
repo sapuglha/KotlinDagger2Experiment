@@ -4,33 +4,67 @@ ext {
     targetSdkVersion = 28
     testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 
-    androidSupportLibVersion = "28.0.0-alpha1"
+    materialComponentsVersion = '1.0.0-beta01'
 
-    supportVersion = '1.0.0-beta01'
-    archVersion = '2.0.0-beta01'
-    archVersionA = '2.0.0-beta01'
+    androidx_general_version = '1.0.0-beta01'
+    androidx_arch_version = '2.0.0-beta01'
+    androidx_room_version = "2.0.0-beta01"
+    androidx_test_espresso_version = '3.1.0-alpha4'
+    androidx_test_general_version = "1.1.0-alpha4"
+
+    arrowVersion = "0.7.2"
+    ankoVersion = "0.10.5"
     daggerVersion = "2.16"
-    ankoVersion = "0.10.1"
-    groupieVersion = "2.0.0"
-    mockitoVersion = "2.15.0"
-    espressoVersion = '3.1.0-alpha3'
+    groupieVersion = "2.1.0"
+    mockitoVersion = "2.21.0"
     okhttpVersion = "3.11.0"
-    arrowVersion = "0.6.1"
+    retrofitVersion = "2.4.0"
+    
+    androidX_appCompat = "androidx.appcompat:appcompat:$androidx_general_version"
+    androidX_browser = "androidx.browser:browser:$androidx_general_version"
+    androidX_cardView = "androidx.cardview:cardview:$androidx_general_version"
+    androidX_constraintLayout = 'androidx.constraintlayout:constraintlayout:1.1.2'
 
-    room = 'androidx.room:room-runtime:2.0.0-beta01'
-    roomRx = 'androidx.room:room-rxjava2:2.0.0-beta01'
-    rxJava = "io.reactivex.rxjava2:rxjava:2.1.6"
+    androidX_core_ktx = "androidx.core:core-ktx:$androidx_general_version"
+    androidX_core_testing = "androidx.arch.core:core-testing:$androidx_arch_version"
+
+    androidX_lifeCycle = "androidx.lifecycle:lifecycle-runtime:$androidx_arch_version"
+    androidX_lifeCycle_extensions = "androidx.lifecycle:lifecycle-extensions:$androidx_arch_version"
+    androidX_lifeCycle_compiler = "androidx.lifecycle:lifecycle-compiler:$androidx_arch_version"
+
+    androidX_room = "androidx.room:room-runtime:$androidx_room_version"
+    androidX_room_rx = "androidx.room:room-rxjava2:$androidx_room_version"
+    androidX_room_compiler = "androidx.room:room-compiler:$androidx_room_version"
+    androidX_room_testing = "androidx.room:room-testing:$androidx_room_version"
+
+    androidx_test_espresso_core = "androidx.test.espresso:espresso-core:$androidx_test_espresso_version"
+    androidx_test_espresso_contrib = "androidx.test.espresso:espresso-contrib:$androidx_test_espresso_version"
+    androidx_test_runner = "androidx.test:runner:$androidx_test_general_version"
+    androidx_test_rules = "androidx.test:rules:$androidx_test_general_version"
+    androidx_test_uiautomator = 'androidx.test.uiautomator:uiautomator:2.2.0-alpha4'
+
+    kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    rxJava = "io.reactivex.rxjava2:rxjava:2.2.0"
+    rxJava_rxkotlin = "io.reactivex.rxjava2:rxkotlin:2.2.0"
+    rxJava_rxandroid = "io.reactivex.rxjava2:rxandroid:2.0.2"
+
     dagger = "com.google.dagger:dagger:$daggerVersion"
-    daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
+    dagger_android = "com.google.dagger:dagger-android:$daggerVersion"
+    dagger_android_support = "com.google.dagger:dagger-android-support:$daggerVersion"
+    dagger_android_processor = "com.google.dagger:dagger-android-processor:$daggerVersion"
+    dagger_compiler = "com.google.dagger:dagger-compiler:$daggerVersion"
 
-    retrofit = "com.squareup.retrofit2:retrofit:2.4.0"
-    retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:2.4.0"
-    retrofitRxJava2Adapter = "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
+    retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    retrofitRxJava2Adapter = "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 
     gson = "com.google.code.gson:gson:2.8.2"
+    picasso = "com.squareup.picasso:picasso:2.5.2"
 
     // Testing
     junit = "junit:junit:4.12"
-    mockito = "org.mockito:mockito-core:2.8.47"
-    androidTestRunner = 'androidx.test:runner:1.1.0-alpha3'
+    mockito_core = "org.mockito:mockito-core:$mockitoVersion"
+    mockito_android = "org.mockito:mockito-android:$mockitoVersion"
+    mockito_kotlin2 = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC1"
 }

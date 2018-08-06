@@ -29,12 +29,13 @@ compileTestKotlin {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    implementation rootProject.ext.kotlinStdlib
 
     implementation rootProject.ext.rxJava
 
     testImplementation rootProject.ext.junit
-    testImplementation rootProject.ext.mockito
+    testImplementation rootProject.ext.mockito_core
     testImplementation('com.nhaarman:mockito-kotlin-kt1.1:1.5.0') {
         exclude group: 'org.jetbrains.kotlin'
     }
