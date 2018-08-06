@@ -19,7 +19,7 @@ def vCode = androidGitVersion.code()
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.robotsandpencils.kotlindaggerexperiement"
+        applicationId "com.robotsandpencils.kotlindaggerexperiment"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
 
@@ -27,7 +27,7 @@ android {
         versionName vName
         versionCode vCode
 
-        testInstrumentationRunner "com.robotsandpencils.kotlindaggerexperiement.TestRunner"
+        testInstrumentationRunner "com.robotsandpencils.kotlindaggerexperiment.TestRunner"
 
         // Output kotlin-dagger-experiment-flavor.apk instead of app-flavor.apk
         archivesBaseName = "kotlin-dagger-experiment"

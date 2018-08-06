@@ -14,6 +14,6 @@ class TestRunner : AndroidJUnitRunner() {
         // to classes
         DexOpener.install(this)
 
-        return super.newApplication(cl, "com.robotsandpencils.kotlindaggerexperiement.TestApp", context)
+        return super.newApplication(cl, "com.robotsandpencils.kotlindaggerexperiment.TestApp", context)
     }
 }

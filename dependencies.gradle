@@ -19,7 +19,7 @@ ext {
     mockitoVersion = "2.21.0"
     okhttpVersion = "3.11.0"
     retrofitVersion = "2.4.0"
-    
+
     androidX_appCompat = "androidx.appcompat:appcompat:$androidx_general_version"
     androidX_browser = "androidx.browser:browser:$androidx_general_version"
     androidX_cardView = "androidx.cardview:cardview:$androidx_general_version"
